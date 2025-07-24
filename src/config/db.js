@@ -1,9 +1,6 @@
-/* Funcionalidades para la configuración de la Base de Datos */
-
-// Realiza la conexión con la Base de Datos "video-store"
 const connectToDataBase = async () => {
-  // Permite cargar variables de entorno desde un archivo ".env"
-  require('dotenv').config()
+  // Se suprimen "logs" innecesarios
+  require('dotenv').config({ quiet: true })
   const dbUrl = process.env.DB_URL
   const dbName = dbUrl.substring(dbUrl.lastIndexOf('/') + 1, dbUrl.indexOf('?'))
 
@@ -11,6 +8,18 @@ const connectToDataBase = async () => {
     console.log(`Conectándose con la Base de Datos "${dbName}"...`)
 
     await require('mongoose').connect(dbUrl)
+
+    // // Se recrean los índices de los productos
+    // const { Product } = require('../api/models/product')
+
+    // for (const index of await Product.collection.indexes()) {
+    //   // El índice "_id_" es obligatorio
+    //   if (index.name !== '_id_') {
+    //     await Product.collection.dropIndex(index.name)
+    //   }
+    // }
+
+    // await Product.syncIndexes()
 
     console.log(
       `Conexión con la Base de Datos "${dbName}" realizada correctamente`

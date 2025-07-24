@@ -1,14 +1,10 @@
-/* Funcionalidades para la configuración de "cloudinary" */
-
-// Realiza la conexión con "cloudinary"
 const connectToCloudinary = () => {
-  // Permite cargar variables de entorno desde un archivo ".env"
-  require('dotenv').config()
+  // Se suprimen "logs" innecesarios
+  require('dotenv').config({ quiet: true })
 
   try {
     console.log('Conectándose con "Cloudinary"...')
 
-    // Permite gestionar archivos en "cloudinary" mediante su API
     require('cloudinary').v2.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
       api_key: process.env.CLOUDINARY_API_KEY,

@@ -1,16 +1,11 @@
-/* Funcionalidades para archivos */
-
-// Permite gestionar archivos en "cloudinary" mediante su API
 const cloudinary = require('cloudinary').v2
 
-// Devuelve el "public ID" de un archivo de "cloudinary"
 const getPublicIdCloudinary = (pathFile) => {
   return `${pathFile.split('/').at(-2)}/${
     pathFile.split('/').at(-1).split('.')[0]
   }`
 }
 
-// Devuelve si un archivo existe en "cloudinary"
 const fileExistsInCloudinary = async (publicId) => {
   try {
     await cloudinary.api.resource(publicId)
@@ -21,7 +16,6 @@ const fileExistsInCloudinary = async (publicId) => {
   }
 }
 
-// Elimina un archivo de "cloudinary"
 const deleteFile = (pathFile, reasonMsg) => {
   const publicId = getPublicIdCloudinary(pathFile)
 
